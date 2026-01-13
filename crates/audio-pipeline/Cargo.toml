@@ -1,0 +1,19 @@
+[package]
+name = "audio-pipeline"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Audio buffering and format conversion for embedded A2DP"
+
+[features]
+default = []
+std = []
+defmt = ["dep:defmt"]
+
+[dependencies]
+defmt = { workspace = true, optional = true }
+portable-atomic = { workspace = true }
+
+[dev-dependencies]
+proptest = "1.5"
