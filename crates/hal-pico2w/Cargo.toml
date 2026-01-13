@@ -1,0 +1,24 @@
+[package]
+name = "hal-pico2w"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Hardware abstraction for Raspberry Pi Pico 2 W (RP2350 + CYW43439)"
+
+[features]
+default = ["defmt"]
+defmt = ["dep:defmt", "embassy-rp/defmt", "cyw43/defmt"]
+
+[dependencies]
+defmt = { workspace = true, optional = true }
+embassy-rp = { workspace = true, features = ["rp235xa", "time-driver"] }
+embassy-time = { workspace = true }
+embassy-sync = { workspace = true }
+cyw43 = { workspace = true, features = ["bluetooth"] }
+cyw43-pio = { workspace = true }
+bt-hci = { workspace = true }
+cortex-m = { workspace = true }
+cortex-m-rt = { workspace = true }
+static_cell = { workspace = true }
+heapless = { workspace = true }
