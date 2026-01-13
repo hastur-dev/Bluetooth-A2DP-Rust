@@ -1,0 +1,56 @@
+[package]
+name = "a2dp-app"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Bluetooth A2DP Source application for Raspberry Pi Pico 2 W"
+
+[features]
+default = ["defmt"]
+defmt = [
+    "dep:defmt",
+    "dep:defmt-rtt",
+    "dep:panic-probe",
+    "embassy-executor/defmt",
+    "embassy-rp/defmt",
+    "sbc-encoder/defmt",
+    "bt-classic/defmt",
+    "hal-pico2w/defmt",
+    "audio-pipeline/defmt",
+]
+
+[dependencies]
+defmt = { workspace = true, optional = true }
+defmt-rtt = { workspace = true, optional = true }
+panic-probe = { workspace = true, optional = true }
+
+embassy-executor = { workspace = true, features = ["arch-cortex-m", "executor-thread"] }
+embassy-rp = { workspace = true, features = ["rp235xa", "time-driver", "critical-section-impl", "binary-info"] }
+embassy-sync = { workspace = true }
+embassy-time = { workspace = true }
+embassy-futures = { workspace = true }
+
+cyw43 = { workspace = true, features = ["bluetooth"] }
+cyw43-pio = { workspace = true }
+bt-hci = { workspace = true }
+embedded-io = "0.7"
+embedded-io-async = "0.7"
+
+cortex-m = { workspace = true }
+cortex-m-rt = { workspace = true }
+static_cell = { workspace = true }
+portable-atomic = { workspace = true }
+critical-section = { workspace = true }
+heapless = { workspace = true }
+
+# Internal crates
+sbc-encoder = { workspace = true }
+usb-audio = { workspace = true }
+bt-classic = { workspace = true }
+hal-pico2w = { workspace = true }
+audio-pipeline = { workspace = true }
+
+[[bin]]
+name = "a2dp-source"
+path = "src/main.rs"
