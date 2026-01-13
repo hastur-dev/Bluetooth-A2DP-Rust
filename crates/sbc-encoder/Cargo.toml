@@ -1,0 +1,19 @@
+[package]
+name = "sbc-encoder"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Pure Rust SBC (Subband Codec) encoder for Bluetooth A2DP - no_std compatible"
+
+[features]
+default = []
+std = []
+defmt = ["dep:defmt"]
+
+[dependencies]
+defmt = { workspace = true, optional = true }
+
+[dev-dependencies]
+# For host-side testing
+proptest = "1.5"
