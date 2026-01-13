@@ -1,0 +1,16 @@
+[package]
+name = "usb-audio"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "USB Audio Class 2.0 (UAC2) device implementation for embassy-usb"
+
+[features]
+default = []
+defmt = ["dep:defmt", "embassy-usb/defmt"]
+
+[dependencies]
+defmt = { workspace = true, optional = true }
+embassy-usb = { workspace = true }
+heapless = { workspace = true }
