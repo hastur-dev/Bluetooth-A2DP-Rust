@@ -1,0 +1,67 @@
+[workspace]
+members = [
+    "crates/a2dp-app",
+    "crates/usb-audio",
+    "crates/sbc-encoder",
+    "crates/bt-classic",
+    "crates/hal-pico2w",
+    "crates/audio-pipeline",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+rust-version = "1.75"
+
+[workspace.dependencies]
+# Embassy ecosystem - using git for RP2350 (Pico 2 W) support
+embassy-executor = { git = "https://github.com/embassy-rs/embassy", default-features = false }
+embassy-rp = { git = "https://github.com/embassy-rs/embassy", default-features = false }
+embassy-sync = { git = "https://github.com/embassy-rs/embassy", default-features = false }
+embassy-time = { git = "https://github.com/embassy-rs/embassy", default-features = false }
+embassy-usb = { git = "https://github.com/embassy-rs/embassy", default-features = false }
+embassy-futures = { git = "https://github.com/embassy-rs/embassy" }
+
+# CYW43 driver - using git for RP2350 support
+cyw43 = { git = "https://github.com/embassy-rs/embassy", default-features = false }
+cyw43-pio = { git = "https://github.com/embassy-rs/embassy" }
+
+# Bluetooth HCI types
+bt-hci = { version = "0.7" }
+
+# Embedded basics
+cortex-m = { version = "0.7" }
+cortex-m-rt = { version = "0.7" }
+embedded-hal = { version = "1.0" }
+embedded-hal-async = { version = "1.0" }
+embedded-io-async = { version = "0.7" }
+
+# Utilities
+heapless = { version = "0.8" }
+defmt = { version = "1.0" }
+defmt-rtt = { version = "1.0" }
+panic-probe = { version = "1.0", features = ["print-defmt"] }
+static_cell = { version = "2.1" }
+portable-atomic = { version = "1.10", features = ["critical-section"] }
+critical-section = { version = "1.2" }
+
+# Internal crates
+sbc-encoder = { path = "crates/sbc-encoder" }
+usb-audio = { path = "crates/usb-audio" }
+bt-classic = { path = "crates/bt-classic" }
+hal-pico2w = { path = "crates/hal-pico2w" }
+audio-pipeline = { path = "crates/audio-pipeline" }
+
+[profile.dev]
+opt-level = 1
+debug = 2
+lto = false
+
+[profile.release]
+opt-level = "z"
+debug = false
+lto = "fat"
+codegen-units = 1
+panic = "abort"
